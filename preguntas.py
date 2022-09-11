@@ -220,10 +220,10 @@ def pregunta_07():
         Dict = {}
         spamreader = csv.reader(csvfile, delimiter='	')
         for row in spamreader:
-            if row[1] in Dict:
-               Dict[row[1]].append(row[0])
+            if int(row[1]) in Dict:
+               Dict[int(row[1])].append(row[0])
             else:
-                Dict[row[1]] = [row[0]]
+                Dict[int(row[1])] = [row[0]]
         list = [(k,v) for k, v in Dict.items()]
         list.sort(key=lambda i: i[0])
     return list
