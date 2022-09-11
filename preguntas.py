@@ -375,4 +375,22 @@ def pregunta_12():
     }
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if row[0] in Dict:
+                Sum = 0
+                test = row[4].split(",")
+                for k in test:
+                    new = k.split(":")
+                    Sum += int(new[1])
+                Dict[row[0]] += Sum
+            else:
+                Sum = 0
+                test = row[4].split(",")
+                for k in test:
+                    new = k.split(":")
+                    Sum += int(new[1])
+                Dict[row[0]] = Sum
+    return Dict
