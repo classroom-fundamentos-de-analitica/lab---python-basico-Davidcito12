@@ -346,7 +346,18 @@ def pregunta_11():
 
 
     """
-    return
+    
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            for i in row[3].split(","):
+                if i in Dict:
+                    Dict[i] += int(row[1])
+                else:
+                    Dict[i] = int(row[1])
+        sort_dictionary = dict(sorted(Dict.items(), key=lambda item: item[0]))
+    return sort_dictionary
 
 
 def pregunta_12():
