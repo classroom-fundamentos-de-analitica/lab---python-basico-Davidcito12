@@ -320,7 +320,12 @@ def pregunta_10():
 
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        list = []
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            list.append((row[0], len(row[3].split(",")),len(row[4].split(","))))
+    return list
 
 
 def pregunta_11():
