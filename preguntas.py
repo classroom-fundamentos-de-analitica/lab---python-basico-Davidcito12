@@ -287,7 +287,19 @@ def pregunta_09():
     }
 
     """
-    return
+    
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            for i in row[4].split(','):
+
+                k = i.split(":")
+                if k[0] in Dict:
+                    Dict[k[0]] +=1
+                else:
+                    Dict[k[0]] = 1
+    return Dict
 
 
 def pregunta_10():
