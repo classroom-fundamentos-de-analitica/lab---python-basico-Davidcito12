@@ -11,17 +11,16 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
 
 def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
 
-    Rta/
-    214
-
-    """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Sumatoria = 0
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            Sumatoria += int(row[1])
+        return Sumatoria
 
 
 def pregunta_02():
