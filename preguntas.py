@@ -262,7 +262,7 @@ def pregunta_08():
                     Dict[int(row[1])].append(row[0])
             else:
                 Dict[int(row[1])] = [row[0]]
-        list = [(k,v) for k, v in Dict.items()]
+        list = [(k,sorted(v)) for k, v in Dict.items()]
         list.sort(key=lambda i: i[0])
     return list
 
