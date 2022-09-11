@@ -171,7 +171,27 @@ def pregunta_06():
     ]
 
     """
-    return
+    import csv
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+             for i in row[4].split(','):
+
+                 k = i.split(":")
+                 if k[0] in Dict:
+                     if Dict[k[0]][1] < int(k[1]):
+                         Dict[k[0]][1] = int(k[1])
+                     elif Dict[k[0]][0] > int(k[1]):
+                         Dict[k[0]][0] = int(k[1])
+                     else:
+                         continue
+                 else:
+                     Dict[k[0]] = [int(k[1]), int(k[1])]
+        list = [(k, v[0], v[1]) for k, v in Dict.items()]
+        list.sort(key = lambda i:i[0])
+
+    return list
 
 
 def pregunta_07():
