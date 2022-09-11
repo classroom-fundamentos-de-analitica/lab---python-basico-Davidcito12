@@ -251,7 +251,20 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if int(row[1]) in Dict:
+                if row[0] in Dict[int(row[1])]:
+                    continue
+                else:
+                    Dict[int(row[1])].append(row[0])
+            else:
+                Dict[int(row[1])] = [row[0]]
+        list = [(k,v) for k, v in Dict.items()]
+        list.sort(key=lambda i: i[0])
+    return list
 
 
 def pregunta_09():
