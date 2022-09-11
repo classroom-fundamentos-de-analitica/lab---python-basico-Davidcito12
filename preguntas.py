@@ -131,8 +131,9 @@ def pregunta_05():
     ]
 
     """
-    Dict = {}
-    spamreader = csv.reader(csvfile, delimiter='	')
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
         for row in spamreader:
             if row[0] in Dict:
                 if Dict[row[0]][0] < int(row[1]):
