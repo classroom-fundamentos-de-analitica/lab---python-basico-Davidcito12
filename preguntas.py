@@ -11,17 +11,16 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
 
 def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
 
-    Rta/
-    214
-
-    """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Sumatoria = 0
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            Sumatoria += int(row[1])
+        return Sumatoria
 
 
 def pregunta_02():
@@ -39,7 +38,17 @@ def pregunta_02():
     ]
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if row[0] in Dict:
+                Dict[row[0]] +=1
+            else:
+                Dict[row[0]] = 1
+        list = [(k, v) for k, v in Dict.items()]
+        list.sort(key = lambda i:i[0])
+    return list
 
 
 def pregunta_03():
@@ -55,9 +64,21 @@ def pregunta_03():
         ("D", 31),
         ("E", 67),
     ]
+    
+    
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+             if row[0] in Dict:
+                 Dict[row[0]] += int(row[1])
+             else:
+                 Dict[row[0]] = int(row[1])
+        list = [(k, v) for k, v in Dict.items()]
+        list.sort(key = lambda i:i[0])
+    return list
 
 
 def pregunta_04():
@@ -82,7 +103,17 @@ def pregunta_04():
     ]
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+             if row[2].split("-")[1] in Dict:
+                 Dict[row[2].split("-")[1]] += 1
+             else:
+                 Dict[row[2].split("-")[1]] = 1
+        list = [(k, v) for k, v in Dict.items()]
+        list.sort(key = lambda i:i[0])
+    return list
 
 
 def pregunta_05():
@@ -100,7 +131,22 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if row[0] in Dict:
+                if Dict[row[0]][0] < int(row[1]):
+                    Dict[row[0]][0] = int(row[1])
+                elif Dict[row[0]][1] > int(row[1]):
+                    Dict[row[0]][1] = int(row[1])
+                else:
+                    continue
+            else:
+                Dict[row[0]] = [int(row[1]), int(row[1])]
+        list = [(k, v[0], v[1]) for k, v in Dict.items()]
+        list.sort(key=lambda i: i[0])
+    return list
 
 
 def pregunta_06():
@@ -125,7 +171,27 @@ def pregunta_06():
     ]
 
     """
-    return
+    import csv
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+             for i in row[4].split(','):
+
+                 k = i.split(":")
+                 if k[0] in Dict:
+                     if Dict[k[0]][1] < int(k[1]):
+                         Dict[k[0]][1] = int(k[1])
+                     elif Dict[k[0]][0] > int(k[1]):
+                         Dict[k[0]][0] = int(k[1])
+                     else:
+                         continue
+                 else:
+                     Dict[k[0]] = [int(k[1]), int(k[1])]
+        list = [(k, v[0], v[1]) for k, v in Dict.items()]
+        list.sort(key = lambda i:i[0])
+
+    return list
 
 
 def pregunta_07():
@@ -149,7 +215,18 @@ def pregunta_07():
     ]
 
     """
-    return
+    
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if int(row[1]) in Dict:
+               Dict[int(row[1])].append(row[0])
+            else:
+                Dict[int(row[1])] = [row[0]]
+        list = [(k,v) for k, v in Dict.items()]
+        list.sort(key=lambda i: i[0])
+    return list
 
 
 def pregunta_08():
@@ -174,7 +251,20 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if int(row[1]) in Dict:
+                if row[0] in Dict[int(row[1])]:
+                    continue
+                else:
+                    Dict[int(row[1])].append(row[0])
+            else:
+                Dict[int(row[1])] = [row[0]]
+        list = [(k,sorted(v)) for k, v in Dict.items()]
+        list.sort(key=lambda i: i[0])
+    return list
 
 
 def pregunta_09():
@@ -197,7 +287,19 @@ def pregunta_09():
     }
 
     """
-    return
+    
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            for i in row[4].split(','):
+
+                k = i.split(":")
+                if k[0] in Dict:
+                    Dict[k[0]] +=1
+                else:
+                    Dict[k[0]] = 1
+    return Dict
 
 
 def pregunta_10():
@@ -218,7 +320,12 @@ def pregunta_10():
 
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        list = []
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            list.append((row[0], len(row[3].split(",")),len(row[4].split(","))))
+    return list
 
 
 def pregunta_11():
@@ -239,7 +346,18 @@ def pregunta_11():
 
 
     """
-    return
+    
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            for i in row[3].split(","):
+                if i in Dict:
+                    Dict[i] += int(row[1])
+                else:
+                    Dict[i] = int(row[1])
+        sort_dictionary = dict(sorted(Dict.items(), key=lambda item: item[0]))
+    return sort_dictionary
 
 
 def pregunta_12():
@@ -257,4 +375,22 @@ def pregunta_12():
     }
 
     """
-    return
+    with open('data.csv', newline='') as csvfile:
+        Dict = {}
+        spamreader = csv.reader(csvfile, delimiter='	')
+        for row in spamreader:
+            if row[0] in Dict:
+                Sum = 0
+                test = row[4].split(",")
+                for k in test:
+                    new = k.split(":")
+                    Sum += int(new[1])
+                Dict[row[0]] += Sum
+            else:
+                Sum = 0
+                test = row[4].split(",")
+                for k in test:
+                    new = k.split(":")
+                    Sum += int(new[1])
+                Dict[row[0]] = Sum
+    return Dict
